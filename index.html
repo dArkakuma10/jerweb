@@ -110,6 +110,49 @@
     <footer>
         <p>2025 Jericho Dumangas. All rights reserved.</p>
     </footer>
+
+    <button id="scrollBtn">⮟</button>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, {
+          threshold: 0.2  
+        });
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.add('hidden');
+            observer.observe(section);
+        });
+
+        const btn = document.getElementById("scrollBtn");
+
+        window.addEventListener("scroll", () =>{
+            const halfwayPoint = document.body.scrollHeight / 2;
+
+            if (window.scrollY > halfwayPoint) {
+                btn.textContent = "⮝"
+            } else {
+                btn.textContent = "⮟"
+            }
+        });
+
+        btn.addEventListener("click", () =>{
+            if (btn.textContent.includes("⮝")){
+
+                window.scrollTo({ top: 0, behavior: "smooth"});
+            }else {
+                window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+            }
+        });
+    </script>
     
 </body>
 </html>
